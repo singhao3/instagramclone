@@ -20,34 +20,58 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   String _errorMessage = '';
 
+  
+
+  // void _signUp() async {
+  //   try {
+  //     await _auth.createUserWithEmailAndPassword(
+  //       email: _emailController.text,
+  //       password: _passwordController.text,
+  //     );
+
+  //     String? userId = _auth.currentUser?.uid;
+  //     if (userId != null) {
+  //       await _saveUsername(userId);
+  //     }
+
+  //     setState(() {
+  //       _errorMessage = '';
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       _errorMessage = e.toString();
+  //     });
+  //   }
+  // }
   void _signUp() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
+  try {
+    await _auth.createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
 
-      String? userId = _auth.currentUser?.uid;
-      if (userId != null) {
-        await _saveUsername(userId);
-      }
+    String? userId = _auth.currentUser?.uid;
+    if (userId != null) {
+      await _saveUsername(userId);
+    }
 
-      setState(() {
-        _errorMessage = '';
-      });
-      
-      Navigator.pushReplacement(
+    setState(() {
+      _errorMessage = '';
+    });
+    
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const HomePage(),
       ),
     );
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    }
+  } catch (e) {
+    setState(() {
+      _errorMessage = e.toString();
+    });
   }
+}
+
 
   Future<void> _saveUsername(String userId) async {
     try {

@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'signup_page.dart';
 import 'home_page.dart';
+import 'signup_page.dart';
+
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -17,28 +18,45 @@ class _AuthPageState extends State<AuthPage> {
   final _passwordController = TextEditingController();
   String _errorMessage = '';
 
+  // void _signIn() async {
+  //   try {
+  //     await _auth.signInWithEmailAndPassword(
+  //       email: _emailController.text,
+  //       password: _passwordController.text,
+  //     );
+  //     setState(() {
+  //       _errorMessage = '';
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       _errorMessage = e.toString();
+  //     });
+  //   }
+    
+
+  // }
   void _signIn() async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      setState(() {
-        _errorMessage = '';
-      });
-      
-      Navigator.pushReplacement(
+  try {
+    await _auth.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    setState(() {
+      _errorMessage = '';
+    });
+    
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const HomePage(),
       ),
     );
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    }
+  } catch (e) {
+    setState(() {
+      _errorMessage = e.toString();
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {
